@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
+const logger = require("./logger");
 
-const database = new Sequelize("sqlite:./database.sqlite");
+const database = new Sequelize("sqlite:./database.sqlite", { logging: msg => logger.debug(msg) });
 
 const Categoria = database.define("categoria", {
     id: {
@@ -55,3 +56,10 @@ Game.belongsTo(Usuario);
 
 Categoria.hasMany(Game);
 Game.belongsTo(Categoria);
+
+module.exports = {
+    database,
+    Categoria,
+    Game,
+    Usuario
+}

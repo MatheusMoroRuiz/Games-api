@@ -1,0 +1,11 @@
+{"level":"debug","message":"Executing (default): CREATE TABLE IF NOT EXISTS `categoria` (`id` UUIDV1 PRIMARY KEY, `nome` VARCHAR(255) NOT NULL, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL);","service":"user-service"}
+{"level":"debug","message":"Executing (default): PRAGMA INDEX_LIST(`categoria`)","service":"user-service"}
+{"level":"debug","message":"Executing (default): PRAGMA INDEX_INFO(`sqlite_autoindex_categoria_1`)","service":"user-service"}
+{"level":"debug","message":"Executing (default): CREATE TABLE IF NOT EXISTS `usuarios` (`id` UUIDV1 PRIMARY KEY, `nome` VARCHAR(255) NOT NULL, `email` VARCHAR(255) NOT NULL, `senha` VARCHAR(255) NOT NULL, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL);","service":"user-service"}
+{"level":"debug","message":"Executing (default): PRAGMA INDEX_LIST(`usuarios`)","service":"user-service"}
+{"level":"debug","message":"Executing (default): PRAGMA INDEX_INFO(`sqlite_autoindex_usuarios_1`)","service":"user-service"}
+{"level":"debug","message":"Executing (default): CREATE TABLE IF NOT EXISTS `games` (`id` UUIDV1 PRIMARY KEY, `nome` VARCHAR(255) NOT NULL, `dataLancamento` DATE, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, `usuarioId` UUIDV1 REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE, `categoriumId` UUIDV1 REFERENCES `categoria` (`id`) ON DELETE SET NULL ON UPDATE CASCADE);","service":"user-service"}
+{"level":"debug","message":"Executing (default): PRAGMA INDEX_LIST(`games`)","service":"user-service"}
+{"level":"debug","message":"Executing (default): PRAGMA INDEX_INFO(`sqlite_autoindex_games_1`)","service":"user-service"}
+{"level":"debug","message":"Executing (default): SELECT `id`, `nome`, `createdAt`, `updatedAt` FROM `categoria` AS `categoria`;","service":"user-service"}
+{"level":"debug","message":"Executing (default): SELECT `game`.`id`, `game`.`nome`, `game`.`dataLancamento`, `game`.`createdAt`, `game`.`updatedAt`, `game`.`usuarioId`, `game`.`categoriumId`, `categorium`.`id` AS `categorium.id`, `categorium`.`nome` AS `categorium.nome`, `categorium`.`createdAt` AS `categorium.createdAt`, `categorium`.`updatedAt` AS `categorium.updatedAt` FROM `games` AS `game` LEFT OUTER JOIN `categoria` AS `categorium` ON `game`.`categoriumId` = `categorium`.`id`;","service":"user-service"}
